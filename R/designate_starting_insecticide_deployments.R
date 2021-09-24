@@ -6,13 +6,13 @@ designate_starting_insecticide_deployments = function(landscape.matrix,
 
   insecticide.armoury = seq(1, number.of.insecticides, by = 1)
 
-  deployment.landscape =  matrix(nrow = number.of.tiles.width,
-                                 ncol = number.of.tiles.length)
+  deployment.landscape =  matrix(nrow = number.of.tiles.length,
+                                 ncol = number.of.tiles.width)
 
   for(x in 1:number.of.tiles.width){
     for(y in 1:number.of.tiles.length){
 
-      deployment.landscape[x, y] = ifelse(landscape.matrix[x,y] == "refugia",
+      deployment.landscape[y, x] = ifelse(landscape.matrix[y, x] == "refugia",
                                           yes = 0,
                                           no = sample(insecticide.armoury, 1, replace = TRUE))
 

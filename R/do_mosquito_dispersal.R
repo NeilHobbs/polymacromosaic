@@ -16,60 +16,60 @@ do_mosquito_dispersal = function(x.coord,
                                  deployment.landscape
                                  ){
   #resistance of those staying
-home.tile = (sim.array[x.coord, y.coord, insecticide, generation, "selection"])
+home.tile = (sim.array[y.coord, x.coord, insecticide, generation, "selection"])
 
 #resistance of 8 neighbouring tiles:::
-tile.1 =  (sim.array[toroidal_boundary_x(x.coord = x.coord-1,
-                                         number.of.tiles.width = number.of.tiles.width),
-                     toroidal_boundary_y(y.coord = y.coord - 1,
-                                         number.of.tiles.length = number.of.tiles.length), insecticide, generation, "selection"])
+tile.1 =  (sim.array[toroidal_boundary_y(y.coord = y.coord-1,
+                                         number.of.tiles.length = number.of.tiles.length),
+                     toroidal_boundary_x(x.coord = x.coord - 1,
+                                         number.of.tiles.width = number.of.tiles.width), insecticide, generation, "selection"])
 
 
 
 
-tile.2 =  (sim.array[toroidal_boundary_x(x.coord = x.coord-1,
-                                         number.of.tiles.width = number.of.tiles.width),
-                     toroidal_boundary_y(y.coord = y.coord,
-                                         number.of.tiles.length = number.of.tiles.length), insecticide, generation, "selection"])
+tile.2 =  (sim.array[toroidal_boundary_y(y.coord = y.coord-1,
+                                         number.of.tiles.length = number.of.tiles.length),
+                     toroidal_boundary_x(x.coord = x.coord,
+                                         number.of.tiles.width = number.of.tiles.width), insecticide, generation, "selection"])
 
 
 
-tile.3 =  (sim.array[toroidal_boundary_x(x.coord = x.coord-1,
-                                         number.of.tiles.width = number.of.tiles.width),
-                     toroidal_boundary_y(y.coord = y.coord+1,
-                                         number.of.tiles.length = number.of.tiles.length), insecticide, generation, "selection"])
+tile.3 =  (sim.array[toroidal_boundary_y(y.coord = y.coord-1,
+                                         number.of.tiles.length = number.of.tiles.length),
+                     toroidal_boundary_x(x.coord = x.coord+1,
+                                         number.of.tiles.width = number.of.tiles.width), insecticide, generation, "selection"])
 
 
 
-tile.4 =  (sim.array[toroidal_boundary_x(x.coord = x.coord,
-                                         number.of.tiles.width = number.of.tiles.width),
-                     toroidal_boundary_y(y.coord = y.coord-1,
-                                         number.of.tiles.length = number.of.tiles.length), insecticide, generation, "selection"])
+tile.4 =  (sim.array[toroidal_boundary_y(y.coord = y.coord,
+                                         number.of.tiles.length = number.of.tiles.length),
+                     toroidal_boundary_x(x.coord = x.coord-1,
+                                         number.of.tiles.width = number.of.tiles.width), insecticide, generation, "selection"])
 
 
 
-tile.5 =  (sim.array[toroidal_boundary_x(x.coord = x.coord,
-                                         number.of.tiles.width = number.of.tiles.width),
-                     toroidal_boundary_y(y.coord = y.coord+1,
-                                         number.of.tiles.length = number.of.tiles.length), insecticide, generation, "selection"])
+tile.5 =  (sim.array[toroidal_boundary_y(y.coord = y.coord,
+                                         number.of.tiles.length = number.of.tiles.length),
+                     toroidal_boundary_x(x.coord = x.coord+1,
+                                         number.of.tiles.width = number.of.tiles.width), insecticide, generation, "selection"])
 
 
-tile.6 =  (sim.array[toroidal_boundary_x(x.coord = x.coord+1,
-                                         number.of.tiles.width = number.of.tiles.width),
-                     toroidal_boundary_y(y.coord = y.coord-1,
-                                         number.of.tiles.length = number.of.tiles.length), insecticide, generation, "selection"])
+tile.6 =  (sim.array[toroidal_boundary_y(y.coord = y.coord+1,
+                                         number.of.tiles.length = number.of.tiles.length),
+                     toroidal_boundary_x(x.coord = x.coord-1,
+                                         number.of.tiles.width = number.of.tiles.width), insecticide, generation, "selection"])
 
 
-tile.7 =  (sim.array[toroidal_boundary_x(x.coord = x.coord+1,
-                                         number.of.tiles.width = number.of.tiles.width),
-                     toroidal_boundary_y(y.coord = y.coord,
-                                         number.of.tiles.length = number.of.tiles.length), insecticide, generation, "selection"])
+tile.7 =  (sim.array[toroidal_boundary_y(y.coord = y.coord+1,
+                                         number.of.tiles.length = number.of.tiles.length),
+                     toroidal_boundary_x(x.coord = x.coord,
+                                         number.of.tiles.width = number.of.tiles.width), insecticide, generation, "selection"])
 
 
-tile.8 =  (sim.array[toroidal_boundary_x(x.coord = x.coord+1,
-                                         number.of.tiles.width = number.of.tiles.width),
-                     toroidal_boundary_y(y.coord = y.coord+1,
-                                         number.of.tiles.length = number.of.tiles.length), insecticide, generation, "selection"])
+tile.8 =  (sim.array[toroidal_boundary_y(y.coord = y.coord+1,
+                                         number.of.tiles.length = number.of.tiles.length),
+                     toroidal_boundary_x(x.coord = x.coord+1,
+                                         number.of.tiles.width = number.of.tiles.width), insecticide, generation, "selection"])
 
 
 
@@ -190,46 +190,47 @@ tile.8.pop = adult_population_size_after_suppression(population.size.landscape =
                                                       female.exposure.landscape = female.exposure.landscape)
 
 #Get the disersal values
-home.dispersal = (1 - dispersal.landscape[x.coord, y.coord])
+home.dispersal = (1 - dispersal.landscape[y.coord, x.coord])
 
-tile.1.dispersal = (dispersal.landscape[toroidal_boundary_x(x.coord = x.coord-1,
-                                                            number.of.tiles.width = number.of.tiles.width),
-                                        toroidal_boundary_y(y.coord = y.coord - 1,
-                                                            number.of.tiles.length = number.of.tiles.length)]/8)
+tile.1.dispersal = (dispersal.landscape[toroidal_boundary_y(y.coord = y.coord-1,
+                                                            number.of.tiles.length = number.of.tiles.length),
+                                        toroidal_boundary_x(x.coord = x.coord - 1,
+                                                            number.of.tiles.width = number.of.tiles.width)]/8)
 
-tile.2.dispersal = (dispersal.landscape[toroidal_boundary_x(x.coord = x.coord-1,
-                                                            number.of.tiles.width = number.of.tiles.width),
-                                        toroidal_boundary_y(y.coord = y.coord,
-                                                            number.of.tiles.length = number.of.tiles.length)]/8)
-tile.3.disersal = (dispersal.landscape[toroidal_boundary_x(x.coord = x.coord-1,
-                                                           number.of.tiles.width = number.of.tiles.width),
-                                       toroidal_boundary_y(y.coord = y.coord+1,
-                                                           number.of.tiles.length = number.of.tiles.length)]/8)
+tile.2.dispersal = (dispersal.landscape[toroidal_boundary_y(y.coord = y.coord-1,
+                                                            number.of.tiles.length = number.of.tiles.length),
+                                        toroidal_boundary_x(x.coord = x.coord,
+                                                            number.of.tiles.width = number.of.tiles.width)]/8)
 
-tile.4.dispersal= (dispersal.landscape[toroidal_boundary_x(x.coord = x.coord,
-                                                           number.of.tiles.width = number.of.tiles.width),
-                                       toroidal_boundary_y(y.coord = y.coord-1,
-                                                           number.of.tiles.length = number.of.tiles.length)]/8)
+tile.3.disersal = (dispersal.landscape[toroidal_boundary_y(y.coord = y.coord-1,
+                                                           number.of.tiles.length = number.of.tiles.length),
+                                       toroidal_boundary_x(x.coord = x.coord+1,
+                                                           number.of.tiles.width = number.of.tiles.width)]/8)
 
-tile.5.dispersal=  (dispersal.landscape[toroidal_boundary_x(x.coord = x.coord,
-                                                            number.of.tiles.width = number.of.tiles.width),
-                                        toroidal_boundary_y(y.coord = y.coord+1,
-                                                            number.of.tiles.length = number.of.tiles.length)]/8)
+tile.4.dispersal= (dispersal.landscape[toroidal_boundary_y(y.coord = y.coord,
+                                                           number.of.tiles.length = number.of.tiles.length),
+                                       toroidal_boundary_x(x.coord = x.coord-1,
+                                                           number.of.tiles.width = number.of.tiles.width)]/8)
 
-tile.6.dispersal=(dispersal.landscape[toroidal_boundary_x(x.coord = x.coord+1,
-                                                          number.of.tiles.width = number.of.tiles.width),
-                                      toroidal_boundary_y(y.coord = y.coord-1,
-                                                          number.of.tiles.length = number.of.tiles.length)]/8)
+tile.5.dispersal=  (dispersal.landscape[toroidal_boundary_y(y.coord = y.coord,
+                                                            number.of.tiles.length = number.of.tiles.length),
+                                        toroidal_boundary_x(x.coord = x.coord+1,
+                                                            number.of.tiles.width = number.of.tiles.width)]/8)
 
-tile.7.dispersal= (dispersal.landscape[toroidal_boundary_x(x.coord = x.coord+1,
-                                                           number.of.tiles.width = number.of.tiles.width),
-                                       toroidal_boundary_y(y.coord = y.coord,
-                                                           number.of.tiles.length = number.of.tiles.length)]/8)
+tile.6.dispersal=(dispersal.landscape[toroidal_boundary_y(y.coord = y.coord+1,
+                                                          number.of.tiles.length = number.of.tiles.length),
+                                      toroidal_boundary_x(x.coord = x.coord-1,
+                                                          number.of.tiles.width = number.of.tiles.width)]/8)
 
-tile.8.dispersal=   (dispersal.landscape[toroidal_boundary_x(x.coord = x.coord+1,
-                                                             number.of.tiles.width = number.of.tiles.width),
-                                         toroidal_boundary_y(y.coord = y.coord+1,
-                                                             number.of.tiles.length = number.of.tiles.length)]/8)
+tile.7.dispersal= (dispersal.landscape[toroidal_boundary_y(y.coord = y.coord+1,
+                                                           number.of.tiles.length = number.of.tiles.length),
+                                       toroidal_boundary_x(x.coord = x.coord,
+                                                           number.of.tiles.width = number.of.tiles.width)]/8)
+
+tile.8.dispersal=   (dispersal.landscape[toroidal_boundary_y(y.coord = y.coord+1,
+                                                             number.of.tiles.length = number.of.tiles.length),
+                                         toroidal_boundary_x(x.coord = x.coord+1,
+                                                             number.of.tiles.width = number.of.tiles.width)]/8)
 
 
 numerator = (home.tile*home.tile.pop*home.dispersal) +
@@ -253,6 +254,11 @@ denominator = (home.tile.pop*home.dispersal) +
               (tile.8.pop * tile.8.dispersal)
 
 resistance.after.migration = numerator/denominator
+
+#set to zero if NA (aka there are no mosquitoes surviving at all)
+resistance.after.migration = ifelse(is.na(resistance.after.migration),
+                                    yes = 0,
+                                    no = resistance.after.migration)
 
 return(resistance.after.migration)
 

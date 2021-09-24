@@ -13,8 +13,8 @@ make_landscape_matrix = function(intervention.coverage,
 
   vector.to.sample = c(rep("intervention", times = frequency.intervention), rep("refugia", times = frequency.refugia))
 
-  landscape.matrix = matrix(nrow = number.of.tiles.width,
-                            ncol = number.of.tiles.length,
+  landscape.matrix = matrix(nrow = number.of.tiles.length,
+                            ncol = number.of.tiles.width,
                             data = sample(vector.to.sample, number.of.tiles, replace = TRUE))
 
   return(landscape.matrix)
