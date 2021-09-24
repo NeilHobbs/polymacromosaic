@@ -7,8 +7,8 @@ set_dispersal_landscape = function(min.dispersal,
                               min = min.dispersal,
                               max = max.dispersal)
   
-  dispersal.matrix =  matrix(nrow = number.of.tiles.width,
-                                ncol = number.of.tiles.length,
+  dispersal.matrix =  matrix(nrow = number.of.tiles.length,
+                                ncol = number.of.tiles.width,
                                 data = dispersal.values) 
   
   

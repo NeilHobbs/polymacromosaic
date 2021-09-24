@@ -17,8 +17,9 @@ run_mosaic_simulation = function(number.of.tiles.width,
                                  population.size,
                                  half.population.bioassay.survival.resistance,
                                  conversion.factor,
-                                 intercept
-                                 ){
+                                 intercept,
+                                 mosaic, ## "mega" or "macro"
+                                 number.of.districts){
 
   sim.array = create_starting_array_mosaic(n.insecticides = number.of.insecticides,
                                            maximum.generations = maximum.generations,
@@ -28,13 +29,29 @@ run_mosaic_simulation = function(number.of.tiles.width,
 
   sim.array[ , , , 1, ] = 0
 
+  
+  
+  if(mosaic == "macro"){
   deployment.landscape = designate_starting_insecticide_deployments(landscape.matrix = make_landscape_matrix(intervention.coverage = intervention.coverage,
                                                                                             number.of.tiles.width = number.of.tiles.width,
                                                                                             number.of.tiles.length = number.of.tiles.length),
                                                    number.of.insecticides = number.of.insecticides,
                                                    number.of.tiles.width = number.of.tiles.width,
-                                                   number.of.tiles.length = number.of.tiles.length)
+                                                   number.of.tiles.length = number.of.tiles.length)}
 
+  if(mosaic == "mega"){
+    
+    deployment.landscape = designate_mega_mosaic_deployments(landscape.matrix = make_landscape_matrix(intervention.coverage = intervention.coverage,
+                                                                                                      number.of.tiles.width = number.of.tiles.width,
+                                                                                                      number.of.tiles.length = number.of.tiles.length),
+                                                             mega.mosaic = make_mega_mosaic(number.districts = number.of.districts,
+                                                                                            number.of.tiles.width = number.of.tiles.width,
+                                                                                            number.of.tiles.length = number.of.tiles.length),
+                                                             number.of.insecticides = number.of.insecticides,
+                                                             number.of.districts = number.of.districts,
+                                                             number.of.tiles.width = number.of.tiles.width,
+                                                             number.of.tiles.length = number.of.tiles.length) 
+  }
 
 
 
@@ -83,8 +100,8 @@ for(generation in 2:maximum.generations){
   for(insecticide in 1:number.of.insecticides){
     for(x in 1:max(number.of.tiles.width)){
       for(y in 1:max(number.of.tiles.length)){
-        if(deployment.landscape[x, y] == insecticide){
-          sim.array[x, y, insecticide, generation, "selection"] = do_insecticide_selection_fitness(sim.array = sim.array,
+        if(deployment.landscape[y, x] == insecticide){
+          sim.array[y, x, insecticide, generation, "selection"] = do_insecticide_selection_fitness(sim.array = sim.array,
                                                                                                    xcoord = x,
                                                                                                    ycoord = y,
                                                                                                    insecticide = insecticide,
@@ -94,7 +111,7 @@ for(generation in 2:maximum.generations){
                                                                                                    heritability.landscape = heritability.landscape,
                                                                                                    exposure.scaling.factor = exposure.scaling.factor,
                                                                                                    fitness.cost.landscape = fitness.cost.landscape)}
-        else(sim.array[x, y, insecticide, generation, "selection"] = do_fitness_costs(sim.array = sim.array,
+        else(sim.array[y, x, insecticide, generation, "selection"] = do_fitness_costs(sim.array = sim.array,
                                                                                       xcoord = x,
                                                                                       ycoord = y,
                                                                                       insecticide = insecticide,
@@ -114,7 +131,7 @@ for(generation in 2:maximum.generations){
     for(x in 1:max(number.of.tiles.width)){
       for(y in 1:max(number.of.tiles.length)){
 
-             sim.array[x, y, insecticide, generation, "migration"] = do_mosquito_dispersal(x.coord = x,
+             sim.array[y, x, insecticide, generation, "migration"] = do_mosquito_dispersal(x.coord = x,
                                                                                            y.coord = y,
                                                                                            sim.array = sim.array,
                                                                                            generation = generation,
@@ -132,5 +149,9 @@ for(generation in 2:maximum.generations){
     }
   }
 }
+ #Still need to include a way to incorporate changing insecticide deployments (ideally based)
+  #on some resistance thresholds, but unclear how this will work given different rates of
+  #evolution in each tile. 
+ 
   return(list(sim.array, landscape.list))
 }

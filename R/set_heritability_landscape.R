@@ -7,8 +7,8 @@ set_heritability_landscape = function(min.heritability,
                               min = min.heritability,
                               max = max.heritability)
   
-  heritability.matrix =  matrix(nrow = number.of.tiles.width,
-                                ncol = number.of.tiles.length,
+  heritability.matrix =  matrix(nrow = number.of.tiles.length,
+                                ncol = number.of.tiles.width,
                                 data = heritability.values) 
   
   

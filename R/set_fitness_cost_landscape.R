@@ -7,8 +7,8 @@ set_fitness_cost_landscape = function(min.fitness.cost,
                                  min = min.fitness.cost,
                                  max = max.fitness.cost)
   
-  fitness.cost.matrix =  matrix(nrow = number.of.tiles.width,
-                                   ncol = number.of.tiles.length,
+  fitness.cost.matrix =  matrix(nrow = number.of.tiles.length,
+                                   ncol = number.of.tiles.width,
                                    data = fitness.cost.values) 
   
   

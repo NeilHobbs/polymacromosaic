@@ -7,8 +7,8 @@ set_female_exposure_landscape = function(min.female.exposure,
                                min = min.female.exposure,
                                max = max.female.exposure)
   
-  female.exposure.matrix =  matrix(nrow = number.of.tiles.width,
-                                 ncol = number.of.tiles.length,
+  female.exposure.matrix =  matrix(nrow = number.of.tiles.length,
+                                 ncol = number.of.tiles.width,
                                  data = female.exposure.values) 
   
   
