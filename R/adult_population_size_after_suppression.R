@@ -22,9 +22,9 @@ adult_population_size_after_suppression = function(population.size.landscape,
                                                    female.exposure.landscape){
 
   #which insecticide:
-  deployed = deployment.landscape[x.coord, y.coord]
+  deployed = deployment.landscape[y.coord, x.coord]
 if(deployed != 0){#suppression only occurs in insecticide treated locations
-  resistance = sim.array[x.coord, y.coord, deployed, generation-1, "migration"] #resistance from previous generation
+  resistance = sim.array[y.coord, x.coord, deployed, generation-1, "migration"] #resistance from previous generation
 
   survival = convert_bioassay_survival_to_field(bioassay.survival = resistance_to_bioassay_survival(maximum.bioassay.survival.proportion = 1,
                                                                                                     mean.population.resistance = resistance,
@@ -35,13 +35,13 @@ if(deployed != 0){#suppression only occurs in insecticide treated locations
                                                 conversion.factor = conversion.factor,
                                                 intercept = intercept)
 
-  female.exposure = female.exposure.landscape[x.coord, y.coord]
+  female.exposure = female.exposure.landscape[y.coord, x.coord]
 
-  population.size = population.size.landscape[x.coord, y.coord]
+  population.size = population.size.landscape[y.coord, x.coord]
 
   final.population.size = (population.size*female.exposure*survival) + ((1-female.exposure)*population.size)
 }
-  if(deployed == 0){final.population.size = population.size.landscape[x.coord, y.coord]}
+  if(deployed == 0){final.population.size = population.size.landscape[y.coord, x.coord]}
 
   return(final.population.size)
 }
